@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:quiz_app/presentation/pages/login_screen.dart';
+import 'package:quiz_app/presentation/widgets/custom_appbar.dart';
 
 class RegisterationScreen extends StatefulWidget {
   const RegisterationScreen({super.key});
@@ -16,10 +17,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.contact_support_outlined),
-        title: const Text('Quiz App'),
-      ),
+      appBar: const CustomAppbar(appbarTitle: 'Quiz App'),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -150,7 +148,9 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       label: const Text('Register',
                           style: TextStyle(fontSize: 20)),
                       style: ElevatedButton.styleFrom(
-                          elevation: 20, shape: const StadiumBorder()),
+                          backgroundColor: Colors.indigo.shade400,
+                          elevation: 20,
+                          shape: const StadiumBorder()),
                       onPressed: () {},
                     ),
                   ),
@@ -167,16 +167,17 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                                     child: const LoginScreen(),
                                   )));
                     },
-                    child: const Text.rich(
+                    child: Text.rich(
                         textAlign: TextAlign.center,
                         TextSpan(
                             text: "Already have an Account?? ",
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                             children: [
                               TextSpan(
                                   text: 'Login',
                                   style: TextStyle(
-                                      fontSize: 22, color: Colors.blue))
+                                      fontSize: 22,
+                                      color: Colors.indigo.shade400))
                             ])),
                   ),
                 ]),

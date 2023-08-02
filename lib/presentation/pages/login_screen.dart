@@ -163,6 +163,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const HomeScreen()));
+                            } else {
+                              BlocProvider.of<LoginBloc>(context).add(
+                                  LoginInvalidEvent(_emailController.text,
+                                      _passwordController.text));
                             }
                           } else {
                             BlocProvider.of<LoginBloc>(context).add(
