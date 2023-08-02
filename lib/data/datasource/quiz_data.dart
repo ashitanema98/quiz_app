@@ -17,23 +17,4 @@ class QuizData {
       throw ArgumentError.notNull();
     }
   }
-
-  // static List<Questions> quizData = [
-  //   Questions(
-  //       question: 'What is the capital of France?',
-  //       options: ['London', 'Berlin', 'Paris', 'Madrid'],
-  //       correctOption: 2),
-  //   Questions(
-  //       question: 'Which planet is known as the Red Planet?',
-  //       options: ['Mars', 'Venus', 'Jupiter', 'Mercury'],
-  //       correctOption: 0),
-  //   Questions(
-  //       question: 'What is the capital of France?',
-  //       options: ['A', 'Berlin', 'Paris', 'Madrid'],
-  //       correctOption: 2),
-  //   Questions(
-  //       question: 'Which planet is known as the Red Planet?',
-  //       options: ['B', 'Venus', 'Jupiter', 'Mercury'],
-  //       correctOption: 0)
-  // ];
 }

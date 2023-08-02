@@ -16,11 +16,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginValidState());
       }
     });
+
     on<LoginInvalidEvent>((event, emit) {
       if (event.emailValue == "" || event.passwordValue == "") {
         emit(LoginErrorState("Email and password is required"));
       }
     });
+
     on<LoginSubmittedEvent>((event, emit) {
       emit(LoginValidState());
     });

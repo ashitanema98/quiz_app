@@ -1,4 +1,4 @@
-import 'dart:convert';
+// ignore_for_file: non_constant_identifier_names
 
 class Questions {
   String question;
@@ -33,16 +33,4 @@ class Questions {
         "correct_answer": correct_answer,
         "incorrect_answers": incorrect_answers,
       };
-//   factory Questions.fromMap(Map<String, dynamic> map) {
-//     return Questions(
-//       map['question'] ?? '',
-//       map['correct_answer'] ?? '',
-//       List<String>.from(map['incorrect_answers']),
-//     );
-//   }
-
-//   String toJson() => json.encode(toMap());
-
-//   factory Questions.fromJson(String source) =>
-//       Questions.fromMap(json.decode(source));
 }

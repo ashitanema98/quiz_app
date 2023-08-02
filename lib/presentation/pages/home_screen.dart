@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/data/datasource/quiz_data.dart';
-import 'package:quiz_app/presentation/bloc/score_bloc.dart';
-import 'package:quiz_app/presentation/bloc/score_state.dart';
+import 'package:quiz_app/presentation/bloc/score_bloc/score_bloc.dart';
 import 'package:quiz_app/presentation/pages/questions_page.dart';
 import 'package:quiz_app/presentation/widgets/custom_appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(appbarTitle: 'Quiz App'),
+      appBar: const CustomAppbar(appbarTitle: 'Quiz App'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ))),
                   child: const Text(
                     "Start",
-                    style: const TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20),
                   )),
             ),
           ],

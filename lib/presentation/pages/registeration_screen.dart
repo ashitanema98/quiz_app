@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/presentation/bloc/login_bloc/login_bloc.dart';
@@ -13,7 +11,6 @@ class RegisterationScreen extends StatefulWidget {
 }
 
 class _RegisterationScreenState extends State<RegisterationScreen> {
-  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   @override
@@ -27,7 +24,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Form(
-            key: _formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,7 +45,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
-                      // labelText: 'Email',
                       hintText: 'Enter Your Email',
                       prefixIcon: const Align(
                         widthFactor: 1.0,
@@ -66,11 +61,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       ),
                       contentPadding: const EdgeInsets.all(16),
                     ),
-                    onChanged: (value) {
-                      // BlocProvider.of<LoginBloc>(context).add(
-                      //     LoginTextChangedEvent(
-                      //         _emailController.text, _passwordController.text));
-                    },
+                    onChanged: (value) {},
                   ),
                   const SizedBox(
                     height: 20,
@@ -90,7 +81,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      // labelText: 'Password',
                       hintText: 'Enter Your Password',
                       prefixIcon: const Align(
                         widthFactor: 1.0,
@@ -107,13 +97,8 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       ),
                       contentPadding: const EdgeInsets.all(16),
                     ),
-                    onChanged: (value) {
-                      // BlocProvider.of<LoginBloc>(context).add(
-                      //     LoginTextChangedEvent(
-                      //         _emailController.text, _passwordController.text));
-                    },
+                    onChanged: (value) {},
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),
@@ -132,7 +117,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      // labelText: 'Password',
                       hintText: 'Enter Your Password',
                       prefixIcon: const Align(
                         widthFactor: 1.0,
@@ -149,17 +133,11 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       ),
                       contentPadding: const EdgeInsets.all(16),
                     ),
-                    onChanged: (value) {
-                      // BlocProvider.of<LoginBloc>(context).add(
-                      //     LoginTextChangedEvent(
-                      //         _emailController.text, _passwordController.text));
-                    },
+                    onChanged: (value) {},
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  // BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-                  // return
                   SizedBox(
                     height: 60,
                     width: 250,
@@ -173,34 +151,12 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                           style: TextStyle(fontSize: 20)),
                       style: ElevatedButton.styleFrom(
                           elevation: 20, shape: const StadiumBorder()),
-                      onPressed: () {
-                        // if (state is LoginValidState) {
-                        //   BlocProvider.of<LoginBloc>(context).add(
-                        //       LoginSubmittedEvent(_emailController.text,
-                        //           _passwordController.text));
-                        //   Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => HomeScreen()));
-                        // }
-                      },
+                      onPressed: () {},
                     ),
-                    // );
-                    // }
                   ),
                   const SizedBox(
                     height: 40,
                   ),
-                  // BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-                  //   if (state is LoginErrorState) {
-                  //     return Text(
-                  //       state.errorMessage,
-                  //       style: TextStyle(color: Colors.red),
-                  //     );
-                  //   } else {
-                  //     return Container();
-                  //   }
-                  // }),
                   InkWell(
                     onTap: () {
                       Navigator.push(

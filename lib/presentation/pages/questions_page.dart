@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/data/datasource/quiz_data.dart';
 import 'package:quiz_app/data/repositories/question_model.dart';
-import 'package:quiz_app/presentation/bloc/score_bloc.dart';
-import 'package:quiz_app/presentation/bloc/score_event.dart';
-import 'package:quiz_app/presentation/bloc/score_state.dart';
+import 'package:quiz_app/presentation/bloc/score_bloc/score_bloc.dart';
+import 'package:quiz_app/presentation/bloc/score_bloc/score_event.dart';
 import 'package:quiz_app/presentation/pages/home_screen.dart';
-import 'package:quiz_app/presentation/pages/result_screen.dart';
 import 'package:quiz_app/presentation/widgets/custom_appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -123,10 +121,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
 
   List<Widget> _buildOptions(
       List<String>? incorrectAnswers, String correctAnswer) {
-    print(incorrectAnswers);
     List<String> options = (incorrectAnswers ?? [])..add(correctAnswer);
     options.shuffle();
-    print(options);
     return options.map((option) {
       return RadioListTile(
         title: Text(option),

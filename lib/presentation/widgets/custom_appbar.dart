@@ -1,11 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:quiz_app/drivers/repo_shared_pref.dart';
 import 'package:quiz_app/presentation/pages/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
-  String appbarTitle;
-  CustomAppbar({
+  final String appbarTitle;
+  const CustomAppbar({
     Key? key,
     required this.appbarTitle,
   }) : super(key: key);
@@ -14,8 +16,7 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   State<CustomAppbar> createState() => _CustomAppbarState();
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class _CustomAppbarState extends State<CustomAppbar> {
@@ -43,9 +44,9 @@ class _CustomAppbarState extends State<CustomAppbar> {
       actions: [
         isLoggedIn
             ? Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: IconButton(
-                  icon: Icon(Icons.logout_outlined),
+                  icon: const Icon(Icons.logout_outlined),
                   onPressed: () async {
                     await Auth.logout();
                     LoginScreen.navigate(context);

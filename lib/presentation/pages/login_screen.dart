@@ -29,18 +29,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(appbarTitle: 'Quiz App'),
+      appBar: const CustomAppbar(appbarTitle: 'Quiz App'),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Form(
-            key: _formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,7 +60,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
-                      // labelText: 'Email',
                       hintText: 'Enter Your Email',
                       prefixIcon: const Align(
                         widthFactor: 1.0,
@@ -103,7 +100,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      // labelText: 'Password',
                       hintText: 'Enter Your Password',
                       prefixIcon: const Align(
                         widthFactor: 1.0,
@@ -127,11 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   InkWell(
-                    onTap: () {
-                      // Navigator.push(context,
-                      // MaterialPageRoute(builder: (context) => SignUpScreen()),
-                      // );
-                    },
+                    onTap: () {},
                     child: const Text.rich(
                         textAlign: TextAlign.end,
                         TextSpan(
@@ -203,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         textAlign: TextAlign.center,
                         TextSpan(
                             text: "Don't have an Account?? ",
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                             children: [
                               TextSpan(
                                   text: 'SignUp',
