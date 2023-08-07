@@ -1,15 +1,21 @@
-abstract class LoginState {}
+import 'package:equatable/equatable.dart';
 
-class LoginInitialState extends LoginState {}
-
-class LoginValidState extends LoginState {}
-
-class LoginErrorState extends LoginState {
+class LoginState extends Equatable {
   final String errorMessage;
-  LoginErrorState(this.errorMessage);
-}
+  final int fieldUntouched;
 
-class LoginInvalidState extends LoginState {
-  final String errorMessage;
-  LoginInvalidState(this.errorMessage);
+  const LoginState({this.errorMessage = '', this.fieldUntouched = 1});
+
+  @override
+  List<Object?> get props => [errorMessage, fieldUntouched];
+
+  LoginState copyWith({
+    String? errorMessage,
+    int? fieldUntouched,
+  }) {
+    return LoginState(
+      errorMessage: errorMessage ?? this.errorMessage,
+      fieldUntouched: fieldUntouched ?? this.fieldUntouched,
+    );
+  }
 }

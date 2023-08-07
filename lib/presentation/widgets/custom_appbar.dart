@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:quiz_app/drivers/repo_shared_pref.dart';
 import 'package:quiz_app/presentation/pages/login_screen.dart';
@@ -49,6 +47,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                   icon: const Icon(Icons.logout_outlined),
                   onPressed: () async {
                     await Auth.logout();
+                    if (!mounted) return;
                     LoginScreen.navigate(context);
                   },
                 ),

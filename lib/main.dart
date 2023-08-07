@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/presentation/bloc/score_bloc/score_bloc.dart';
@@ -11,25 +9,41 @@ import 'package:quiz_app/presentation/pages/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.getInstance().then((prefs) {
-    bool isLoggedIn = prefs.getBool("isLoggedIn") ?? false;
-    return runApp(MyApp(isLoggedIn: isLoggedIn));
-  });
+
+  return runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  bool isLoggedIn;
-  MyApp({
+class MyApp extends StatefulWidget {
+  const MyApp({
     Key? key,
-    required this.isLoggedIn,
   }) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isLoggedIn = false;
+  @override
+  void initState() {
+    super.initState();
+    _isLoggedIn();
+  }
+
+  Future<void> _isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final val = prefs.getBool("isLoggedIn") ?? false;
+    setState(() {
+      isLoggedIn = val;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        home: (isLoggedIn
+        home: (isLoggedIn == true
             ? BlocProvider(
                 create: (context) => ScoreBloc(),
                 child: const HomeScreen(),

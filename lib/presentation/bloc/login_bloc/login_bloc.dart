@@ -4,29 +4,37 @@ import 'package:quiz_app/presentation/bloc/login_bloc/login_event.dart';
 import 'package:quiz_app/presentation/bloc/login_bloc/login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(LoginInitialState()) {
+  LoginBloc() : super(const LoginState()) {
     on<LoginTextChangedEvent>((event, emit) {
       if (event.emailValue == "" || event.passwordValue == "") {
-        emit(LoginErrorState("Invalid username or password"));
+        emit(state.copyWith(
+            errorMessage: "Invalid username or password",
+            fieldUntouched: event.fieldUntouched));
       } else if (EmailValidator.validate(event.emailValue) == false) {
-        emit(LoginErrorState("Invalid email address"));
-      } else if (event.passwordValue.length < 7) {
-        emit(LoginErrorState("Invalid password"));
+        emit(state.copyWith(
+            errorMessage: "Invalid email address",
+            fieldUntouched: event.fieldUntouched));
       } else {
-        emit(LoginValidState());
+        emit(state.copyWith(
+            errorMessage: "", fieldUntouched: event.fieldUntouched));
       }
     });
 
-    on<LoginInvalidEvent>((event, emit) {
-      if (event.emailValue == "" || event.passwordValue == "") {
-        emit(LoginErrorState("Email and password is required"));
+    on<LoginInvalidEvent>((event, emit) async {
+      if (event.fieldUntouched == 1) {
+        emit(state.copyWith(
+            errorMessage: "Email and password is required",
+            fieldUntouched: event.fieldUntouched));
       } else {
-        emit(LoginErrorState("Wrong Credentials"));
+        emit(state.copyWith(
+            errorMessage: "Wrong Credentials",
+            fieldUntouched: event.fieldUntouched));
       }
     });
 
     on<LoginSubmittedEvent>((event, emit) {
-      emit(LoginValidState());
+      emit(state.copyWith(
+          errorMessage: "", fieldUntouched: event.fieldUntouched));
     });
   }
 }

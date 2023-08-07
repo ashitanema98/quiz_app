@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/data/datasource/quiz_data.dart';
@@ -51,6 +49,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
     } else {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt('score', score);
+      if (!mounted) return;
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     }

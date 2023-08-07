@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/drivers/repo_shared_pref.dart';
@@ -29,6 +27,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final Auth auth = Auth();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   @override
@@ -78,8 +77,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     onChanged: (value) {
                       BlocProvider.of<LoginBloc>(context).add(
-                          LoginTextChangedEvent(
-                              _emailController.text, _passwordController.text));
+                          LoginTextChangedEvent(_emailController.text,
+                              _passwordController.text, 0));
                     },
                   ),
                   const SizedBox(
@@ -118,8 +117,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     onChanged: (value) {
                       BlocProvider.of<LoginBloc>(context).add(
-                          LoginTextChangedEvent(
-                              _emailController.text, _passwordController.text));
+                          LoginTextChangedEvent(_emailController.text,
+                              _passwordController.text, 0));
                     },
                   ),
                   InkWell(
@@ -152,26 +151,30 @@ class _LoginScreenState extends State<LoginScreen> {
                             elevation: 20,
                             shape: const StadiumBorder()),
                         onPressed: () async {
-                          if (state is LoginValidState) {
-                            if (await Auth.login(_emailController.text,
-                                _passwordController.text)) {
+                          if (state.fieldUntouched == 1) {
+                            BlocProvider.of<LoginBloc>(context).add(
+                                LoginInvalidEvent(_emailController.text,
+                                    _passwordController.text, 1));
+                          } else {
+                            if (state.errorMessage == '' &&
+                                await auth.login(_emailController.text,
+                                        _passwordController.text) ==
+                                    true) {
+                              if (!mounted) return;
                               BlocProvider.of<LoginBloc>(context).add(
                                   LoginSubmittedEvent(_emailController.text,
-                                      _passwordController.text));
+                                      _passwordController.text, 1));
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const HomeScreen()));
                             } else {
+                              if (!mounted) return;
                               BlocProvider.of<LoginBloc>(context).add(
                                   LoginInvalidEvent(_emailController.text,
-                                      _passwordController.text));
+                                      _passwordController.text, 0));
                             }
-                          } else {
-                            BlocProvider.of<LoginBloc>(context).add(
-                                LoginInvalidEvent(_emailController.text,
-                                    _passwordController.text));
                           }
                         },
                       ),
@@ -181,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 40,
                   ),
                   BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-                    if (state is LoginErrorState) {
+                    if (state.errorMessage != '') {
                       return ErrorContainer(data: state.errorMessage);
                     } else {
                       return Container();
