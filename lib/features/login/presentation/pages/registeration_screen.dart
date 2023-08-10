@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:quiz_app/features/login/presentation/pages/login_screen.dart';
 import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
 
@@ -159,13 +157,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                    create: (context) => LoginBloc(),
-                                    child: const LoginScreen(),
-                                  )));
+                      LoginScreen.navigate(context);
                     },
                     child: Text.rich(
                         textAlign: TextAlign.center,

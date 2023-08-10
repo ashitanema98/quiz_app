@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/features/login/drivers/repo_shared_pref.dart';
+
 import 'package:quiz_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:quiz_app/features/login/presentation/bloc/login_event.dart';
 import 'package:quiz_app/features/login/presentation/bloc/login_state.dart';
-import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
 import 'package:quiz_app/features/login/presentation/pages/registeration_screen.dart';
+import 'package:quiz_app/features/quiz/data/repositories/question_repository_impl.dart';
+import 'package:quiz_app/features/quiz/domain/repository/question_repository.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
 import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
 import 'package:quiz_app/features/login/presentation/widgets/error_widget.dart';
 
+import '../../../quiz/data/datasource/quiz_data.dart';
+import '../../domain/usecase/auth_usecase.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-
   static navigate(BuildContext context) {
     Navigator.push(
         context,
@@ -30,6 +34,16 @@ class _LoginScreenState extends State<LoginScreen> {
   final Auth auth = Auth();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  QuizDataSource ds = QuizDataSource();
+  late QuestionRepository repository;
+
+  @override
+  void initState() {
+    super.initState();
+    repository = QuestionRepositoryImpl(ds);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,8 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const HomeScreen()));
+                                      builder: (context) => HomeScreen(
+                                            repository: repository,
+                                          )));
                             } else {
                               if (!mounted) return;
                               BlocProvider.of<LoginBloc>(context).add(
@@ -193,10 +208,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   InkWell(
                     onTap: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegisterationScreen()),
-                      );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const RegisterationScreen()));
                     },
                     child: Text.rich(
                         textAlign: TextAlign.center,

@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/features/quiz/data/datasource/quiz_data.dart';
-import 'package:quiz_app/features/quiz/data/repositories/question_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
+import 'package:quiz_app/features/quiz/domain/entity/question.dart';
+import 'package:quiz_app/features/quiz/domain/repository/question_repository.dart';
 import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
 import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_event.dart';
 import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
-import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class QuestionsPage extends StatefulWidget {
-  const QuestionsPage({super.key});
+  final QuestionRepository repository;
+  const QuestionsPage({
+    Key? key,
+    required this.repository,
+  }) : super(key: key);
 
-  static navigate(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => ScoreBloc(),
-                  child: const QuestionsPage(),
-                )));
-  }
+  // static navigate(BuildContext context) {
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) => BlocProvider(
+  //                 create: (context) => ScoreBloc(),
+  //                 child: QuestionsPage(repository: repository,),
+  //               )));
+  // }
 
   @override
   State<QuestionsPage> createState() => _QuestionsPageState();
@@ -30,7 +35,13 @@ class _QuestionsPageState extends State<QuestionsPage> {
 
   String _selectedOption = "";
   int score = 0;
-  final List<Questions> _quizDataList = QuizData.quizDataList;
+  late List<Questions> _quizDataList;
+
+  @override
+  void initState() {
+    super.initState();
+    _quizDataList = widget.repository.getQuestions();
+  }
 
   void _checkAnswer(String selectedOption) {
     String correctOption = _quizDataList[_currentQuestionIndex].correct_answer;
@@ -51,7 +62,11 @@ class _QuestionsPageState extends State<QuestionsPage> {
       await prefs.setInt('score', score);
       if (!mounted) return;
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeScreen(
+                    repository: widget.repository,
+                  )));
     }
   }
 

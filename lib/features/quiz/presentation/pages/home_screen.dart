@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/features/quiz/data/datasource/quiz_data.dart';
-import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
-import 'package:quiz_app/features/quiz/presentation/pages/questions_page.dart';
-import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
+import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/questions_page.dart';
+
+import '../../domain/repository/question_repository.dart';
+import '../../domain/usecases/get_questions_usecase.dart';
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final QuestionRepository repository;
+  const HomeScreen({
+    Key? key,
+    required this.repository,
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -15,12 +22,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int score = 0;
+  // QuestionRepository repository = QuestionRepositoryImpl();
 
   @override
   void initState() {
     super.initState();
     _getScore();
-    QuizData.fetchingQuiz();
+    GetQuestionsUsecase questionsUsecase =
+        GetQuestionsUsecase(widget.repository);
+
+    questionsUsecase.fetchingQuestions();
   }
 
   Future<void> _getScore() async {
@@ -60,7 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(
                           builder: (context) => BlocProvider(
                                 create: (context) => ScoreBloc(),
-                                child: const QuestionsPage(),
+                                child: QuestionsPage(
+                                    repository: widget.repository),
                               ))),
                   child: const Text(
                     "Start Again",

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:quiz_app/features/login/presentation/pages/login_screen.dart';
+import 'package:quiz_app/features/quiz/data/datasource/quiz_data.dart';
+import 'package:quiz_app/features/quiz/data/repositories/question_repository_impl.dart';
+import 'package:quiz_app/features/quiz/domain/repository/question_repository.dart';
 import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,10 +27,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isLoggedIn = false;
+  QuizDataSource ds = QuizDataSource();
+  late QuestionRepository repository;
   @override
   void initState() {
     super.initState();
     _isLoggedIn();
+    repository = QuestionRepositoryImpl(ds);
   }
 
   Future<void> _isLoggedIn() async {
@@ -46,7 +52,9 @@ class _MyAppState extends State<MyApp> {
         home: (isLoggedIn == true
             ? BlocProvider(
                 create: (context) => ScoreBloc(),
-                child: const HomeScreen(),
+                child: HomeScreen(
+                  repository: repository,
+                ),
               )
             : BlocProvider(
                 create: (context) => LoginBloc(),
