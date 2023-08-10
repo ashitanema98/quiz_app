@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/data/datasource/quiz_data.dart';
-import 'package:quiz_app/presentation/bloc/score_bloc/score_bloc.dart';
-import 'package:quiz_app/presentation/pages/questions_page.dart';
-import 'package:quiz_app/presentation/widgets/custom_appbar.dart';
+import 'package:quiz_app/features/quiz/data/datasource/quiz_data.dart';
+import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/questions_page.dart';
+import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Your Previous Score: $score',
+              'Your Score: $score',
               style: TextStyle(
                   fontSize: 24,
                   color: Colors.indigo.shade400,
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: const QuestionsPage(),
                               ))),
                   child: const Text(
-                    "Start",
+                    "Start Again",
                     style: TextStyle(fontSize: 20),
                   )),
             ),

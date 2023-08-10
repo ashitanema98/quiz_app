@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_bloc.dart';
-import 'package:quiz_app/presentation/pages/login_screen.dart';
-import 'package:quiz_app/presentation/widgets/custom_appbar.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_bloc.dart';
+import 'package:quiz_app/features/login/presentation/pages/login_screen.dart';
+import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
 
 class RegisterationScreen extends StatefulWidget {
   const RegisterationScreen({super.key});

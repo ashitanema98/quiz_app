@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:quiz_app/drivers/repo_shared_pref.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_bloc.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_event.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_state.dart';
+import 'package:quiz_app/features/login/drivers/repo_shared_pref.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_bloc.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_event.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_state.dart';
 
 class MockLoginState extends Mock implements LoginState {}
 

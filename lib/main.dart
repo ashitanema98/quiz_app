@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/presentation/bloc/score_bloc/score_bloc.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_bloc.dart';
+import 'package:quiz_app/features/login/presentation/pages/login_screen.dart';
+import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:quiz_app/presentation/bloc/login_bloc/login_bloc.dart';
-import 'package:quiz_app/presentation/pages/home_screen.dart';
-import 'package:quiz_app/presentation/pages/login_screen.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/drivers/repo_shared_pref.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_bloc.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_event.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_state.dart';
-import 'package:quiz_app/presentation/pages/home_screen.dart';
-import 'package:quiz_app/presentation/pages/registeration_screen.dart';
-import 'package:quiz_app/presentation/widgets/custom_appbar.dart';
-import 'package:quiz_app/presentation/widgets/login_widgets/error_widget.dart';
+import 'package:quiz_app/features/login/drivers/repo_shared_pref.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_bloc.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_event.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_state.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
+import 'package:quiz_app/features/login/presentation/pages/registeration_screen.dart';
+import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
+import 'package:quiz_app/features/login/presentation/widgets/error_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/data/datasource/quiz_data.dart';
-import 'package:quiz_app/data/repositories/question_model.dart';
-import 'package:quiz_app/presentation/bloc/score_bloc/score_bloc.dart';
-import 'package:quiz_app/presentation/bloc/score_bloc/score_event.dart';
-import 'package:quiz_app/presentation/pages/home_screen.dart';
-import 'package:quiz_app/presentation/widgets/custom_appbar.dart';
+import 'package:quiz_app/features/quiz/data/datasource/quiz_data.dart';
+import 'package:quiz_app/features/quiz/data/repositories/question_model.dart';
+import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
+import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_event.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
+import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class QuestionsPage extends StatefulWidget {

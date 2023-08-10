@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/drivers/repo_shared_pref.dart';
-import 'package:quiz_app/presentation/pages/login_screen.dart';
+import 'package:quiz_app/features/login/drivers/repo_shared_pref.dart';
+import 'package:quiz_app/features/login/presentation/pages/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {

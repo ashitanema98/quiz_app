@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:quiz_app/presentation/pages/home_screen.dart';
+import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
 
 class ScoreCard extends StatelessWidget {
   int score;

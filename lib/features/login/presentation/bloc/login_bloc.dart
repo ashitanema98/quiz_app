@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_event.dart';
-import 'package:quiz_app/presentation/bloc/login_bloc/login_state.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_event.dart';
+import 'package:quiz_app/features/login/presentation/bloc/login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(const LoginState()) {

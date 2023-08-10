@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:quiz_app/data/repositories/question_model.dart';
+import 'package:quiz_app/features/quiz/data/repositories/question_model.dart';
 
 class QuizData {
   static List<Questions> quizDataList = [];
