@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
@@ -7,13 +8,10 @@ import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.d
 import 'package:quiz_app/features/quiz/presentation/pages/questions_page.dart';
 
 import '../../domain/repository/question_repository.dart';
-import '../../domain/usecases/get_questions_usecase.dart';
 
 class HomeScreen extends StatefulWidget {
-  final QuestionRepository repository;
   const HomeScreen({
     Key? key,
-    required this.repository,
   }) : super(key: key);
 
   @override
@@ -22,16 +20,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int score = 0;
-  // QuestionRepository repository = QuestionRepositoryImpl();
+  final repository = GetIt.instance<QuestionRepository>();
 
   @override
   void initState() {
     super.initState();
     _getScore();
-    GetQuestionsUsecase questionsUsecase =
-        GetQuestionsUsecase(widget.repository);
-
-    questionsUsecase.fetchingQuestions();
+    repository.fetchingQuestions();
   }
 
   Future<void> _getScore() async {
@@ -71,8 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(
                           builder: (context) => BlocProvider(
                                 create: (context) => ScoreBloc(),
-                                child: QuestionsPage(
-                                    repository: widget.repository),
+                                child: const QuestionsPage(),
                               ))),
                   child: const Text(
                     "Start Again",

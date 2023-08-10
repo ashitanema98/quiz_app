@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
@@ -10,21 +11,9 @@ import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_event.
 import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
 
 class QuestionsPage extends StatefulWidget {
-  final QuestionRepository repository;
   const QuestionsPage({
     Key? key,
-    required this.repository,
   }) : super(key: key);
-
-  // static navigate(BuildContext context) {
-  //   Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //           builder: (context) => BlocProvider(
-  //                 create: (context) => ScoreBloc(),
-  //                 child: QuestionsPage(repository: repository,),
-  //               )));
-  // }
 
   @override
   State<QuestionsPage> createState() => _QuestionsPageState();
@@ -36,11 +25,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
   String _selectedOption = "";
   int score = 0;
   late List<Questions> _quizDataList;
+  final repository = GetIt.instance<QuestionRepository>();
 
   @override
   void initState() {
     super.initState();
-    _quizDataList = widget.repository.getQuestions();
+    _quizDataList = repository.getQuestions();
   }
 
   void _checkAnswer(String selectedOption) {
@@ -62,11 +52,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
       await prefs.setInt('score', score);
       if (!mounted) return;
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                    repository: widget.repository,
-                  )));
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     }
   }
 

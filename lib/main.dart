@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:quiz_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:quiz_app/features/login/presentation/pages/login_screen.dart';
 import 'package:quiz_app/features/quiz/data/datasource/quiz_data.dart';
@@ -12,8 +13,14 @@ import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
+  setupDependencies();
   return runApp(const MyApp());
+}
+
+void setupDependencies() {
+  GetIt.instance.registerSingleton<QuizDataSource>(QuizDataSource());
+  GetIt.instance.registerSingleton<QuestionRepository>(
+      QuestionRepositoryImpl(GetIt.instance<QuizDataSource>()));
 }
 
 class MyApp extends StatefulWidget {
@@ -27,13 +34,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isLoggedIn = false;
-  QuizDataSource ds = QuizDataSource();
-  late QuestionRepository repository;
+
   @override
   void initState() {
     super.initState();
     _isLoggedIn();
-    repository = QuestionRepositoryImpl(ds);
   }
 
   Future<void> _isLoggedIn() async {
@@ -52,9 +57,7 @@ class _MyAppState extends State<MyApp> {
         home: (isLoggedIn == true
             ? BlocProvider(
                 create: (context) => ScoreBloc(),
-                child: HomeScreen(
-                  repository: repository,
-                ),
+                child: const HomeScreen(),
               )
             : BlocProvider(
                 create: (context) => LoginBloc(),
