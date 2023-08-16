@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:quiz_app/features/quiz/domain/usecases/get_questions_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
 import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
 import 'package:quiz_app/features/quiz/presentation/pages/questions_page.dart';
-
-import '../../domain/repository/question_repository.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -20,13 +19,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int score = 0;
-  final repository = GetIt.instance<QuestionRepository>();
+  final usecase = GetIt.instance<GetQuestionsUsecase>();
 
   @override
   void initState() {
     super.initState();
     _getScore();
-    repository.fetchingQuestions();
+    usecase.fetchingQuestions();
   }
 
   Future<void> _getScore() async {

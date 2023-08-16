@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:quiz_app/features/quiz/domain/usecases/get_questions_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:quiz_app/features/login/presentation/widgets/custom_appbar.dart';
 import 'package:quiz_app/features/quiz/domain/entity/question.dart';
-import 'package:quiz_app/features/quiz/domain/repository/question_repository.dart';
 import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_bloc.dart';
 import 'package:quiz_app/features/quiz/presentation/bloc/score_bloc/score_event.dart';
 import 'package:quiz_app/features/quiz/presentation/pages/home_screen.dart';
@@ -25,12 +25,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
   String _selectedOption = "";
   int score = 0;
   late List<Questions> _quizDataList;
-  final repository = GetIt.instance<QuestionRepository>();
+  final usecase = GetIt.instance<GetQuestionsUsecase>();
 
   @override
   void initState() {
     super.initState();
-    _quizDataList = repository.getQuestions();
+    _quizDataList = usecase.getQuestions();
   }
 
   void _checkAnswer(String selectedOption) {
